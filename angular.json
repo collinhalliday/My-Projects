@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "sit-stand",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "sit-stand": {
+      "projectType": "application",
+      "root": "apps/sit-stand",
+      "sourceRoot": "apps/sit-stand/src",
+      "prefix": "my",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/sit-stand",
+            "index": "apps/sit-stand/src/index.html",
+            "main": "apps/sit-stand/src/main.ts",
+            "polyfills": "apps/sit-stand/src/polyfills.ts",
+            "tsConfig": "apps/sit-stand/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/sit-stand/src/favicon.ico",
+              "apps/sit-stand/src/assets"
+            ],
+            "styles": ["apps/sit-stand/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/sit-stand/src/environments/environment.ts",
+                  "with": "apps/sit-stand/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "sit-stand:build:production"
+            },
+            "development": {
+              "browserTarget": "sit-stand:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "sit-stand:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/sit-stand/src/**/*.ts",
+              "apps/sit-stand/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/sit-stand"],
+          "options": {
+            "jestConfig": "apps/sit-stand/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "sit-stand-e2e": {
+      "root": "apps/sit-stand-e2e",
+      "sourceRoot": "apps/sit-stand-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/sit-stand-e2e/cypress.json",
+            "tsConfig": "apps/sit-stand-e2e/tsconfig.e2e.json",
+            "devServerTarget": "sit-stand:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "sit-stand:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/sit-stand-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
