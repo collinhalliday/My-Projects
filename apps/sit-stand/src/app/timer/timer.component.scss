@@ -17,8 +17,17 @@
     border-radius: 10px;
   }
 
+  .sub-text {
+    margin-top: 5px;
+
+    .current-action-time {
+      cursor: pointer;
+      font-weight: bold;
+    }
+  }
+
   .button-container {
-    margin-top: 25px;
+    margin-top: 20px;
 
     button {
       cursor: pointer;

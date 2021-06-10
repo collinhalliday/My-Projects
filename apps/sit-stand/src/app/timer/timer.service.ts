@@ -55,7 +55,7 @@ export class TimerService implements OnDestroy {
  }
 
  ngOnDestroy(): void {
-   this._counterSubscription.unsubscribe();
+   if(this._counterSubscription) this._counterSubscription.unsubscribe();
  }
 }
 

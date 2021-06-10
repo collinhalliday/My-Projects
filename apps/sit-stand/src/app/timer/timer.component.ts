@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { iif, of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
@@ -41,7 +42,10 @@ export class TimerComponent {
   }));
 
 
-  constructor(private _timerService: TimerService) {}
+  constructor(
+    private _timerService: TimerService,
+    private _router: Router
+    ) {}
 
   public timerRunner(timerAction: TimerActions): void {
     this.timerRunning = !this.timerRunning;
@@ -61,6 +65,10 @@ export class TimerComponent {
     this.currentActionTime = this.currentAction === this.actions.sit ? this._sittingTime : this._standingTime;
     this.currentActionAudioURL = this.currentAction === this.actions.sit ? this._sittingAudioURL : this._standingAudioURL;
     this.reset();
+  }
+
+  public navigateToSettings(): void {
+    this._router.navigate(['settings']);
   }
 
 }
