@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { SettingsService } from '../core/settings.service';
 
@@ -20,7 +21,10 @@ export class SettingsComponent {
   public standingAudioUrlEditing = false;
   public showSubmitBtn = false;
 
-  constructor(private _settings: SettingsService) {}
+  constructor(
+    private _settings: SettingsService,
+    private _router: Router
+  ) {}
 
   public updateSetting(formValues: Record<string, unknown>): void {
     for(const key in formValues) {
@@ -32,8 +36,18 @@ export class SettingsComponent {
     this.showSubmitBtn = false;
   }
 
+  public enterSubmit(event, formValues: Record<string, unknown>): void {
+    if(event.keyCode === 13) {
+      this.updateSetting(formValues);
+    }
+  }
+
   public edit(setting: string): void {
     this[`${setting}Editing`] = true;
     this.showSubmitBtn = true;
+  }
+
+  public returnToTimer(): void {
+    this._router.navigate(['']);
   }
 }

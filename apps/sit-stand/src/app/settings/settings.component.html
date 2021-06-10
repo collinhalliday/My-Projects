@@ -1,6 +1,7 @@
+<p class="return-link" (click)="returnToTimer()">Return to Timer</p>
 <h3 class="settings-heading">Adjust Your Settings</h3>
 
-<form #settingsForm="ngForm" (ngSubmit)="updateSetting(settingsForm.value)">
+<form #settingsForm="ngForm" (ngSubmit)="updateSetting(settingsForm.value)" (keydown)="enterSubmit($event, settingsForm.value)">
     <ul class="settings-list">
         <li *ngIf="sittingTime$ | async as sittingTime">
             <ng-container *ngIf="sittingTimeEditing; else displaySittingTime">
@@ -18,8 +19,10 @@
                     </mat-form-field>
             </ng-container>
             <ng-template #displaySittingTime>
-                <span style="margin-right:10px">Sitting Time:</span>
-                <span class="setting-time">{{sittingTime}} minutes</span>
+                <small>
+                    <span style="margin-right:10px">Sitting Time:</span>
+                    <span class="setting-time">{{sittingTime}} minutes</span>
+                </small>
                 <button class="btn-basic" (click)="edit('sittingTime')">Edit</button>
             </ng-template>
         </li>
@@ -38,8 +41,10 @@
                 </mat-form-field>
             </ng-container>
             <ng-template #displayStandingTime>
-                <span style="margin-right:10px">Standing Time:</span>
-                <span class="setting-time">{{standingTime}} minutes</span>
+                <small>
+                    <span style="margin-right:10px">Standing Time:</span>
+                    <span class="setting-time">{{standingTime}} minutes</span>
+                </small>
                 <button class="btn-basic" (click)="edit('standingTime')">Edit</button>
             </ng-template>
         </li>
@@ -58,8 +63,10 @@
                 </mat-form-field>
             </ng-container>
             <ng-template #displaySittingAudioUrl>
-                <span style="margin-right:10px">Sitting Audio URL:</span>
-                <span class="setting-time">{{sittingAudioUrl}}</span>
+                <small>
+                    <span style="margin-right:10px">Sitting Audio URL:</span>
+                    <span class="setting-time">{{sittingAudioUrl}}</span>
+                </small>
                 <button class="btn-basic" (click)="edit('sittingAudioUrl')">Edit</button>
             </ng-template>
         </li>
@@ -78,8 +85,10 @@
                 </mat-form-field>
             </ng-container>
             <ng-template #displayStandingAudioUrl>
-                <span style="margin-right:10px">Standing Audio URL:</span>
-                <span class="setting-time">{{standingAudioUrl}}</span>
+                <small>
+                    <span style="margin-right:10px">Standing Audio URL:</span>
+                    <span class="setting-time">{{standingAudioUrl}}</span>
+                </small>
                 <button class="btn-basic" (click)="edit('standingAudioUrl')">Edit</button>
             </ng-template>
         </li>
