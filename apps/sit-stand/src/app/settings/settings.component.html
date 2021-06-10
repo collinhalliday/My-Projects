@@ -3,99 +3,52 @@
     <h3>Adjust Your Settings</h3>
 </div>
 
-<form #settingsForm="ngForm" (ngSubmit)="updateSetting(settingsForm.value)" (keydown)="enterSubmit($event, settingsForm.value)">
+<form 
+    [formGroup]="settingsForm"
+    (ngSubmit)="updateSetting(settingsForm.value)" 
+    (keydown)="enterSubmit($event, settingsForm.value)"
+>
     <ul class="settings-list">
-        <li *ngIf="sittingTime$ | async as sittingTime">
-            <ng-container *ngIf="sittingTimeEditing; else displaySittingTime">
-                    <mat-form-field>
-                        <mat-label>
-                            Sitting Time
-                        </mat-label>
-                        <input
-                            type="number"
-                            matInput
-                            [ngModel]="sittingTime"
-                            name="sittingTime"
-                            #sittingT="ngModel"
-                        />
-                    </mat-form-field>
-            </ng-container>
-            <ng-template #displaySittingTime>
-                <small>
-                    <span style="margin-right:10px">Sitting Time:</span>
-                    <span class="setting-time">{{sittingTime}} minutes</span>
-                </small>
-                <button class="btn-basic" (click)="edit('sittingTime')">Edit</button>
-            </ng-template>
+        <li>
+            <my-projects-setting-item
+                label="Sitting Time"
+                [control]="settingsForm.get('sittingTime')"
+                [editingForm]="editingForm"
+                [displayValue]="settingsForm.get('sittingTime').value + ' minutes'"
+                (toggleEdit)="toggleEdit()"
+                type="number"
+            >
+            </my-projects-setting-item>
         </li>
-        <li *ngIf="standingTime$ | async as standingTime">
-            <ng-container *ngIf="standingTimeEditing; else displayStandingTime">
-                <mat-form-field>
-                    <mat-label>
-                        Standing Time
-                    </mat-label>
-                    <input 
-                        type="number" 
-                        matInput 
-                        [ngModel]="standingTime" 
-                        name="standingTime" 
-                    />
-                </mat-form-field>
-            </ng-container>
-            <ng-template #displayStandingTime>
-                <small>
-                    <span style="margin-right:10px">Standing Time:</span>
-                    <span class="setting-time">{{standingTime}} minutes</span>
-                </small>
-                <button class="btn-basic" (click)="edit('standingTime')">Edit</button>
-            </ng-template>
+        <li>
+            <my-projects-setting-item 
+                label="Standing Time" 
+                [control]="settingsForm.get('standingTime')"
+                [editingForm]="editingForm" 
+                [displayValue]="settingsForm.get('standingTime').value + ' minutes'"
+                (toggleEdit)="toggleEdit()"
+                type="number"
+            >
+            </my-projects-setting-item>
         </li>
-        <li *ngIf="sittingAudioUrl$ | async as sittingAudioUrl">
-            <ng-container *ngIf="sittingAudioUrlEditing; else displaySittingAudioUrl">
-                <mat-form-field>
-                    <mat-label>
-                        Sitting Audio URL
-                    </mat-label>
-                    <input 
-                        type="text" 
-                        matInput 
-                        [ngModel]="sittingAudioUrl" 
-                        name="sittingAudioUrl" 
-                    />
-                </mat-form-field>
-            </ng-container>
-            <ng-template #displaySittingAudioUrl>
-                <small>
-                    <span style="margin-right:10px">Sitting Audio URL:</span>
-                    <span class="setting-time">{{sittingAudioUrl}}</span>
-                </small>
-                <button class="btn-basic" (click)="edit('sittingAudioUrl')">Edit</button>
-            </ng-template>
+        <li>
+            <my-projects-setting-item 
+                label="Sitting Audio URL" 
+                [control]="settingsForm.get('sittingAudioUrl')"
+                [editingForm]="editingForm" 
+                (toggleEdit)="toggleEdit()">
+            </my-projects-setting-item>
         </li>
-        <li *ngIf="standingAudioUrl$ | async as standingAudioUrl">
-            <ng-container *ngIf="standingAudioUrlEditing; else displayStandingAudioUrl">
-                <mat-form-field>
-                    <mat-label>
-                        Standing Audio URL
-                    </mat-label>
-                    <input 
-                        type="text" 
-                        matInput 
-                        [ngModel]="standingAudioUrl" 
-                        name="standingAudioUrl" 
-                    />
-                </mat-form-field>
-            </ng-container>
-            <ng-template #displayStandingAudioUrl>
-                <small>
-                    <span style="margin-right:10px">Standing Audio URL:</span>
-                    <span class="setting-time">{{standingAudioUrl}}</span>
-                </small>
-                <button class="btn-basic" (click)="edit('standingAudioUrl')">Edit</button>
-            </ng-template>
+        <li>
+            <my-projects-setting-item 
+                label="Standing Audio URL" 
+                [control]="settingsForm.get('standingAudioUrl')"
+                [editingForm]="editingForm" 
+                (toggleEdit)="toggleEdit()">
+            </my-projects-setting-item>
         </li>
     </ul>
-    <div class="submit-container" *ngIf="showSubmitBtn">
+    <div class="submit-container" *ngIf="editingForm">
         <button type="submit" class="btn-basic">Save Changes</button>
     </div>
 </form>

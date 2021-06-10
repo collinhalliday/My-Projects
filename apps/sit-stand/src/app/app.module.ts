@@ -7,6 +7,7 @@ import { TimerComponent } from './timer/timer.component';
 import { SettingsComponent } from './settings/settings.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SettingItemComponent } from './settings/setting-item/setting-item.component';
 
 
 const routes = [{
@@ -19,11 +20,12 @@ const routes = [{
 }];
 
 @NgModule({
-  declarations: [AppComponent, TimerComponent, SettingsComponent],
+  declarations: [AppComponent, TimerComponent, SettingsComponent, SettingItemComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [DecimalPipe],
   bootstrap: [AppComponent],
