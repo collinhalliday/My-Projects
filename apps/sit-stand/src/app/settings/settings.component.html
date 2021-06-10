@@ -13,14 +13,38 @@
                             matInput
                             [ngModel]="sittingTime"
                             name="sittingTime"
+                            #sittingT="ngModel"
                         />
                     </mat-form-field>
             </ng-container>
             <ng-template #displaySittingTime>
                 <span style="margin-right:10px">Sitting Time:</span>
                 <span class="setting-time">{{sittingTime}} minutes</span>
-                <button class="edit-button" (click)="sittingTimeEditing = !sittingTimeEditing">Edit</button>
+                <button class="btn-basic" (click)="edit('sittingTime')">Edit</button>
+            </ng-template>
+        </li>
+        <li *ngIf="standingTime$ | async as standingTime">
+            <ng-container *ngIf="standingTimeEditing; else displayStandingTime">
+                <mat-form-field>
+                    <mat-label>
+                        Standing Time
+                    </mat-label>
+                    <input 
+                        type="number" 
+                        matInput 
+                        [ngModel]="standingTime" 
+                        name="standingTime" 
+                    />
+                </mat-form-field>
+            </ng-container>
+            <ng-template #displayStandingTime>
+                <span style="margin-right:10px">Standing Time:</span>
+                <span class="setting-time">{{standingTime}} minutes</span>
+                <button class="btn-basic" (click)="edit('standingTime')">Edit</button>
             </ng-template>
         </li>
     </ul>
+    <div class="submit-container" *ngIf="showSubmitBtn">
+        <button type="submit" class="btn-basic">Save Changes</button>
+    </div>
 </form>

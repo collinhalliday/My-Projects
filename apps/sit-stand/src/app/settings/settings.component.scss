@@ -7,19 +7,16 @@
   padding-inline-start: 0;
   text-align: center;
 
+  li {
+    margin-bottom: 10px;
+  }
+
   .setting-time {
     margin-right: 10px;
     font-weight: bold;
   }
+}
 
-  .edit-button {
-    background-color: white;
-    border: 1px black solid;
-    border-radius: 4px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: lightgray;
-    }
-  }
+.submit-container {
+  text-align: center;
 }

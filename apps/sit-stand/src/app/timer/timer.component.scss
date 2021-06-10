@@ -28,23 +28,5 @@
 
   .button-container {
     margin-top: 20px;
-
-    button {
-      cursor: pointer;
-      background-color: white;
-      border: 1px solid black;
-      border-radius: 5px;
-      margin: 0 5px;
-
-      &:hover {
-        background-color: lightgray;
-      }
-
-      &:disabled {
-        border-color: lightgray;
-        background-color: white;
-        cursor: default;
-      }
-    }
   }
 }

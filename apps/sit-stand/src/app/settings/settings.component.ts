@@ -10,16 +10,26 @@ import { SettingsService } from '../core/settings.service';
 export class SettingsComponent {
 
   public sittingTime$ = this._settings.sittingTime$;
-  public sittingTimeEditing = false;
+  public standingTime$ = this._settings.standingTime$;
 
-  public standingTime = 15;
+  public sittingTimeEditing = false;
+  public standingTimeEditing = false;
+  public showSubmitBtn = false;
 
   constructor(private _settings: SettingsService) {}
 
-  updateSetting(formValues: Record<string, unknown>): void {
+  public updateSetting(formValues: Record<string, unknown>): void {
     for(const key in formValues) {
-      this._settings.updateSetting(key, formValues[key]);
-      this[`${key}Editing`] = false;
+      if(formValues[key]) {
+        this._settings.updateSetting(key, formValues[key]);
+        this[`${key}Editing`] = false;
+      }
     }
+    this.showSubmitBtn = false;
+  }
+
+  public edit(setting: string): void {
+    this[`${setting}Editing`] = true;
+    this.showSubmitBtn = true;
   }
 }
