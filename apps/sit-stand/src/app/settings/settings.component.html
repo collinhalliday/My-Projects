@@ -43,6 +43,46 @@
                 <button class="btn-basic" (click)="edit('standingTime')">Edit</button>
             </ng-template>
         </li>
+        <li *ngIf="sittingAudioUrl$ | async as sittingAudioUrl">
+            <ng-container *ngIf="sittingAudioUrlEditing; else displaySittingAudioUrl">
+                <mat-form-field>
+                    <mat-label>
+                        Sitting Audio URL
+                    </mat-label>
+                    <input 
+                        type="text" 
+                        matInput 
+                        [ngModel]="sittingAudioUrl" 
+                        name="sittingAudioUrl" 
+                    />
+                </mat-form-field>
+            </ng-container>
+            <ng-template #displaySittingAudioUrl>
+                <span style="margin-right:10px">Sitting Audio URL:</span>
+                <span class="setting-time">{{sittingAudioUrl}}</span>
+                <button class="btn-basic" (click)="edit('sittingAudioUrl')">Edit</button>
+            </ng-template>
+        </li>
+        <li *ngIf="standingAudioUrl$ | async as standingAudioUrl">
+            <ng-container *ngIf="standingAudioUrlEditing; else displayStandingAudioUrl">
+                <mat-form-field>
+                    <mat-label>
+                        Standing Audio URL
+                    </mat-label>
+                    <input 
+                        type="text" 
+                        matInput 
+                        [ngModel]="standingAudioUrl" 
+                        name="standingAudioUrl" 
+                    />
+                </mat-form-field>
+            </ng-container>
+            <ng-template #displayStandingAudioUrl>
+                <span style="margin-right:10px">Standing Audio URL:</span>
+                <span class="setting-time">{{standingAudioUrl}}</span>
+                <button class="btn-basic" (click)="edit('standingAudioUrl')">Edit</button>
+            </ng-template>
+        </li>
     </ul>
     <div class="submit-container" *ngIf="showSubmitBtn">
         <button type="submit" class="btn-basic">Save Changes</button>

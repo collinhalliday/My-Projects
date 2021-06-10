@@ -11,9 +11,13 @@ export class SettingsComponent {
 
   public sittingTime$ = this._settings.sittingTime$;
   public standingTime$ = this._settings.standingTime$;
+  public sittingAudioUrl$ = this._settings.sittingAudioUrl$;
+  public standingAudioUrl$ = this._settings.standingAudioUrl$;
 
   public sittingTimeEditing = false;
   public standingTimeEditing = false;
+  public sittingAudioUrlEditing = false;
+  public standingAudioUrlEditing = false;
   public showSubmitBtn = false;
 
   constructor(private _settings: SettingsService) {}

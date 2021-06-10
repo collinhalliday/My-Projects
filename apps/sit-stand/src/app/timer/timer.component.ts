@@ -16,8 +16,8 @@ export class TimerComponent {
 
   private readonly _standingTime = 15;
   private readonly _sittingTime = 45;
-  private readonly _sittingAudioURL = 'https://www.youtube.com/watch?v=IYH7_GzP4Tg';
-  private readonly _standingAudioURL = 'https://www.youtube.com/watch?v=hwZNL7QVJjE';
+  private readonly _sittingAudioURL = 'youtube.com/watch?v=IYH7_GzP4Tg';
+  private readonly _standingAudioURL = 'youtube.com/watch?v=hwZNL7QVJjE';
 
   public timerActions = TimerActions;
   public actions = Actions;
@@ -57,7 +57,7 @@ export class TimerComponent {
   }
 
   public playAudio(): void {
-    window.open(this.currentActionAudioURL);
+    window.open(`https://www.${this.currentActionAudioURL}`);
   }
 
   public switchAction(): void {
