@@ -1,5 +1,25 @@
+.settings-heading {
+  text-align: center;
+}
+
 .settings-list {
   list-style-type: none;
   padding-inline-start: 0;
   text-align: center;
+
+  .setting-time {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .edit-button {
+    background-color: white;
+    border: 1px black solid;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: lightgray;
+    }
+  }
 }

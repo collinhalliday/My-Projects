@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { TimerComponent } from './timer/timer.component';
 import { SettingsComponent } from './settings/settings.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const routes = [{
@@ -21,7 +22,8 @@ const routes = [{
   declarations: [AppComponent, TimerComponent, SettingsComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
   providers: [DecimalPipe],
   bootstrap: [AppComponent],

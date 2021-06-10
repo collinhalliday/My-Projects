@@ -36,7 +36,7 @@
       "projectType": "application",
       "root": "apps/sit-stand",
       "sourceRoot": "apps/sit-stand/src",
-      "prefix": "my",
+      "prefix": "my-projects",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -146,6 +146,27 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/sit-stand-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "utilities-functions": {
+      "root": "libs/utilities/function",
+      "sourceRoot": "libs/utilities/functions/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/utilities/functions/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/utilities/functions"],
+          "options": {
+            "jestConfig": "libs/utilities/functions/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

@@ -1,10 +1,26 @@
-<h3>Adjust Your Settings</h3>
+<h3 class="settings-heading">Adjust Your Settings</h3>
 
-<ul class="settings-list">
-    <li>
-        <div>
-            <span style="margin-right:10px">Sitting Time:</span>
-            <span>{{sittingTime}} minutes</span>
-        </div>
-    </li>
-</ul>
+<form #settingsForm="ngForm" (ngSubmit)="updateSetting(settingsForm.value)">
+    <ul class="settings-list">
+        <li *ngIf="sittingTime$ | async as sittingTime">
+            <ng-container *ngIf="sittingTimeEditing; else displaySittingTime">
+                    <mat-form-field>
+                        <mat-label>
+                            Sitting Time
+                        </mat-label>
+                        <input
+                            type="number"
+                            matInput
+                            [ngModel]="sittingTime"
+                            name="sittingTime"
+                        />
+                    </mat-form-field>
+            </ng-container>
+            <ng-template #displaySittingTime>
+                <span style="margin-right:10px">Sitting Time:</span>
+                <span class="setting-time">{{sittingTime}} minutes</span>
+                <button class="edit-button" (click)="sittingTimeEditing = !sittingTimeEditing">Edit</button>
+            </ng-template>
+        </li>
+    </ul>
+</form>

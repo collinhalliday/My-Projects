@@ -25,6 +25,9 @@
     "sit-stand-e2e": {
       "tags": [],
       "implicitDependencies": ["sit-stand"]
+    },
+    "utilities-functions": {
+      "tags": []
     }
   }
 }
