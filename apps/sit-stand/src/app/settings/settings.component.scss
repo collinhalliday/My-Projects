@@ -1,15 +1,15 @@
-.return-link {
+.settings-header {
   text-align: center;
-  cursor: pointer;
 
-  &:hover {
-    text-decoration: underline;
-    font-weight: bold;
+  .return-link {
+    cursor: pointer;
+    display: inline;
+
+    &:hover {
+      text-decoration: underline;
+      font-weight: bold;
+    }
   }
-}
-
-.settings-heading {
-  text-align: center;
 }
 
 .settings-list {
