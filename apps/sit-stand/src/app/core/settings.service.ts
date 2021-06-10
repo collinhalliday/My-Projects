@@ -10,8 +10,8 @@ export class SettingsService {
 
   @SessionStorage({ key: 'sitting_time', autoSave: true, initValue: '45'}) private _sittingTimeStorage: number;
   @SessionStorage({ key: 'standing_time', autoSave: true, initValue: '15'}) private _standingTimeStorage: number;
-  @SessionStorage({ key: 'sitting_audio_url', autoSave: true, initValue: 'youtube.com/watch?v=IYH7_GzP4Tg'}) private _sittingAudioUrlStorage: number;
-  @SessionStorage({ key: 'standing_audio_url', autoSave: true, initValue: 'youtube.com/watch?v=hwZNL7QVJjE'}) private _standingAudioUrlStorage: number;
+  @SessionStorage({ key: 'sitting_audio_url', autoSave: true, initValue: 'youtube.com/watch?v=IYH7_GzP4Tg'}) private _sittingAudioUrlStorage: string;
+  @SessionStorage({ key: 'standing_audio_url', autoSave: true, initValue: 'youtube.com/watch?v=hwZNL7QVJjE'}) private _standingAudioUrlStorage: string;
   
   private _sittingTime$ = new BehaviorSubject(this._sittingTime);
   public sittingTime$ = this._sittingTime$.asObservable();

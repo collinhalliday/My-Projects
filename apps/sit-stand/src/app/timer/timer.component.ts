@@ -1,29 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { iif, of } from 'rxjs';
+import { iif, of, combineLatest } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { TimerService } from './timer.service';
+import { SettingsService } from '../core/settings.service';
 
+@UntilDestroy()
 @Component({
   selector: 'my-timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss'],
   providers: [TimerService]
 })
-export class TimerComponent {
+export class TimerComponent implements OnInit {
+  private _standingTime: number;
+  private _sittingTime: number;
+  private _sittingAudioURL: string;
+  private _standingAudioURL: string;
 
-  private readonly _standingTime = 15;
-  private readonly _sittingTime = 45;
-  private readonly _sittingAudioURL = 'youtube.com/watch?v=IYH7_GzP4Tg';
-  private readonly _standingAudioURL = 'youtube.com/watch?v=hwZNL7QVJjE';
-
+  public currentActionTime: number;
+  public currentActionAudioURL: string;
   public timerActions = TimerActions;
   public actions = Actions;
   public currentAction = Actions.sit;
-  public currentActionTime = this._sittingTime;
-  public currentActionAudioURL = this._sittingAudioURL;
   public timerRunning = false;
 
   public timer$ = this._timerService.timer$.pipe(
@@ -44,7 +46,8 @@ export class TimerComponent {
 
   constructor(
     private _timerService: TimerService,
-    private _router: Router
+    private _router: Router,
+    private _settings: SettingsService
     ) {}
 
   public timerRunner(timerAction: TimerActions): void {
@@ -69,6 +72,26 @@ export class TimerComponent {
 
   public navigateToSettings(): void {
     this._router.navigate(['settings']);
+  }
+
+  ngOnInit(): void {
+    combineLatest([
+      this._settings.standingTime$,
+      this._settings.sittingTime$,
+      this._settings.standingAudioUrl$,
+      this._settings.sittingAudioUrl$
+    ]).pipe(
+      untilDestroyed(this)
+    )
+    .subscribe(([standTime, sitTime, standAudio, sitAudio]) => {
+      this._standingTime = standTime;
+      this._sittingTime = sitTime;
+      this._sittingAudioURL = sitAudio;
+      this._standingAudioURL = standAudio;
+
+      this.currentActionTime = this.currentAction === Actions.sit ? sitTime : standTime;
+      this.currentActionAudioURL = this.currentAction === Actions.sit ? sitAudio : standAudio;
+    });
   }
 
 }
