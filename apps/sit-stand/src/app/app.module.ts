@@ -8,6 +8,9 @@ import { SettingsComponent } from './settings/settings.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingItemComponent } from './settings/setting-item/setting-item.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 const routes = [{
@@ -25,7 +28,10 @@ const routes = [{
     BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [DecimalPipe],
   bootstrap: [AppComponent],

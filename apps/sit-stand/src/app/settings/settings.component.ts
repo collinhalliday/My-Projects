@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+
 import { combineLatest } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { SettingsService } from '../core/settings.service';
 
-@UntilDestroy()
 @Component({
   selector: 'my-settings',
   templateUrl: './settings.component.html',
@@ -14,12 +14,7 @@ import { SettingsService } from '../core/settings.service';
 })
 export class SettingsComponent implements OnInit {
 
-  public sittingTimeEditing = false;
-  public standingTimeEditing = false;
-  public sittingAudioUrlEditing = false;
-  public standingAudioUrlEditing = false;
   public editingForm = false;
-
   public settingsForm: FormGroup;
 
   constructor(
@@ -33,7 +28,6 @@ export class SettingsComponent implements OnInit {
     for(const key in formValues) {
       if(formValues[key]) {
         this._settings.updateSetting(key, formValues[key]);
-        this[`${key}Editing`] = false;
       }
     }
     this.editingForm = false;
@@ -60,9 +54,10 @@ export class SettingsComponent implements OnInit {
       this._settings.standingAudioUrl$,
       this._settings.sittingAudioUrl$
     ]).pipe(
-      untilDestroyed(this)
+      take(1)
     )
     .subscribe(([standTime, sitTime, standAudio, sitAudio]) => {
+      console.log('emitting')
       this.settingsForm = this._fb.group({
         sittingTime: sitTime,
         standingTime: standTime,

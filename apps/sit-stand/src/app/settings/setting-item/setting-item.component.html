@@ -1,16 +1,12 @@
-<ng-container *ngIf="editingSetting; else settingDisplay">
+<ng-container *ngIf="editingSetting; else displaySetting">
     <mat-form-field>
         <mat-label>
             <small>{{label}} </small>
         </mat-label>
-        <input 
-            [type]="type" 
-            matInput 
-            [formControl]="control" 
-        />
+        <input matInput [type]="type" [formControl]="control" />
     </mat-form-field>
 </ng-container>
-<ng-template #settingDisplay>
+<ng-template #displaySetting>
     <small>
         <span style="margin-right:10px">{{label}}:</span>
         <span class="setting-time">{{displayValue ? displayValue : control.value}}</span>

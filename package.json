@@ -30,14 +30,17 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "12.0.0",
+    "@angular/cdk": "^12.0.4",
     "@angular/common": "12.0.0",
     "@angular/compiler": "12.0.0",
     "@angular/core": "12.0.0",
     "@angular/forms": "12.0.0",
+    "@angular/material": "^12.0.4",
     "@angular/platform-browser": "12.0.0",
     "@angular/platform-browser-dynamic": "12.0.0",
     "@angular/router": "12.0.0",
     "@nrwl/angular": "12.3.3",
+    "bootstrap": "^5.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
