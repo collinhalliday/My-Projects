@@ -57,7 +57,6 @@ export class SettingsComponent implements OnInit {
       take(1)
     )
     .subscribe(([standTime, sitTime, standAudio, sitAudio]) => {
-      console.log('emitting')
       this.settingsForm = this._fb.group({
         sittingTime: sitTime,
         standingTime: standTime,

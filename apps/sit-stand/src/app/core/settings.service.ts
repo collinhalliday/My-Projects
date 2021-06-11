@@ -8,8 +8,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SettingsService {
 
-  @SessionStorage({ key: 'sitting_time', autoSave: true, initValue: '45'}) private _sittingTimeStorage: number;
-  @SessionStorage({ key: 'standing_time', autoSave: true, initValue: '15'}) private _standingTimeStorage: number;
+  @SessionStorage({ key: 'sitting_time', autoSave: true, initValue: '45'}) private _sittingTimeStorage: string;
+  @SessionStorage({ key: 'standing_time', autoSave: true, initValue: '15'}) private _standingTimeStorage: string;
   @SessionStorage({ key: 'sitting_audio_url', autoSave: true, initValue: 'youtube.com/watch?v=IYH7_GzP4Tg'}) private _sittingAudioUrlStorage: string;
   @SessionStorage({ key: 'standing_audio_url', autoSave: true, initValue: 'youtube.com/watch?v=hwZNL7QVJjE'}) private _standingAudioUrlStorage: string;
   
@@ -23,10 +23,10 @@ export class SettingsService {
   public standingAudioUrl$ = this._standingAudioUrl$.asObservable();
 
   private get _sittingTime() {
-    return this._sittingTimeStorage;
+    return JSON.parse(this._sittingTimeStorage);
   }
   private get _standingTime() {
-    return this._standingTimeStorage;
+    return JSON.parse(this._standingTimeStorage);
   }
   private get _sittingAudioUrl() {
     return this._sittingAudioUrlStorage;

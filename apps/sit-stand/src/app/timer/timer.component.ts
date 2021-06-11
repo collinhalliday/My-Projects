@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { iif, of, combineLatest } from 'rxjs';
+import { iif, of, combineLatest, Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-import { TimerService } from './timer.service';
+import { TimerService, TimerState } from './timer.service';
 import { SettingsService } from '../core/settings.service';
 
 @UntilDestroy()
@@ -28,9 +28,7 @@ export class TimerComponent implements OnInit {
   public currentAction = Actions.sit;
   public timerRunning = false;
 
-  public timer$ = this._timerService.timer$.pipe(
-    switchMap(timerState => iif(() => timerState.minutes === this.currentActionTime, this._finishTimer$, of(timerState)))
-  );
+  public timer$: Observable<TimerState>;
 
   private _finishTimer$ = of({ 
     minutes: 0,
@@ -91,6 +89,10 @@ export class TimerComponent implements OnInit {
 
       this.currentActionTime = this.currentAction === Actions.sit ? sitTime : standTime;
       this.currentActionAudioURL = this.currentAction === Actions.sit ? sitAudio : standAudio;
+
+      this.timer$ = this._timerService.timer$.pipe(
+        switchMap(timerState => iif(() => timerState.minutes === this.currentActionTime, this._finishTimer$, of(timerState)))
+      );
     });
   }
 

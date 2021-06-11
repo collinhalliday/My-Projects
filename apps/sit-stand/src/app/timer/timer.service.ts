@@ -6,7 +6,7 @@ import { BehaviorSubject, Subscription, timer } from 'rxjs';
 @Injectable()
 export class TimerService implements OnDestroy {
 
- private _timerState = {
+ private _timerState: TimerState = {
     minutes: 0,
     seconds: 0,
     milliseconds: 0
@@ -59,4 +59,9 @@ export class TimerService implements OnDestroy {
  }
 }
 
+export interface TimerState {
+  minutes: number;
+  seconds: number;
+  milliseconds: number;
+}
 
